@@ -1,9 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import { Container, StyledButton } from 'styles/components/Countdown';
 
+import { useChallenge } from 'hooks/challenge';
+
 const Countdown = (): any => {
-  const [time, setTime] = useState(25 * 60);
-  const [active, setActive] = useState(false);
+  const [time, setTime] = useState(0.05 * 60);
+  const [isActive, setIsActive] = useState(false);
+  const [hasFinished, setHasFinished] = useState(false);
+
+  const { startNewChallenge, activeChallenge } = useChallenge();
+
+  const timeOut = useRef<NodeJS.Timeout>(null);
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
@@ -17,16 +24,30 @@ const Countdown = (): any => {
     .split('');
 
   const startCountdown = (): any => {
-    setActive(!active);
+    if (hasFinished) {
+      setTime(25 * 60);
+    }
+    setIsActive(true);
+  };
+
+  const resetCountdown = (): any => {
+    clearTimeout(timeOut.current);
+
+    setIsActive(false);
+    setTime(0.05 * 60);
   };
 
   useEffect(() => {
-    if (active && time > 0) {
-      setTimeout(() => {
+    if (isActive && time > 0) {
+      timeOut.current = setTimeout(() => {
         setTime(time - 1);
       }, 1000);
+    } else if (isActive && time === 0) {
+      setHasFinished(true);
+      setIsActive(false);
+      startNewChallenge();
     }
-  }, [active, time]);
+  }, [isActive, time, startNewChallenge]);
 
   return (
     <div>
@@ -41,9 +62,16 @@ const Countdown = (): any => {
           <span>{secondsSecondNumber}</span>
         </div>
       </Container>
-      <StyledButton onClick={startCountdown} active={active}>
-        {active ? 'Pausar o ciclo' : 'Iniciar um ciclo'}
-      </StyledButton>
+      {hasFinished ? (
+        <StyledButton disabled>Ciclo encerrado</StyledButton>
+      ) : (
+        <StyledButton
+          onClick={isActive ? resetCountdown : startCountdown}
+          active={isActive}
+        >
+          {isActive ? 'Abandonar ciclo' : 'Iniciar um ciclo'}
+        </StyledButton>
+      )}
     </div>
   );
 };

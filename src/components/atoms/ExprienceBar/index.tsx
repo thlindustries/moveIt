@@ -1,15 +1,28 @@
+import { useMemo } from 'react';
+
 import { Container, ProgressBar } from 'styles/components/ExperienceBar';
 
-const ExperienceBar: React.FC = () => (
-  <Container>
-    <span>0 xp</span>
-    <div>
-      <ProgressBar at={37}>
-        <span>5400xp</span>
-      </ProgressBar>
-    </div>
-    <span>0 xp</span>
-  </Container>
-);
+import { useChallenge } from 'hooks/challenge';
+
+const ExperienceBar: React.FC = () => {
+  const { currentExperience, experienceToNextLevel } = useChallenge();
+
+  const progressBarAt = useMemo(
+    () => (100 * currentExperience) / experienceToNextLevel,
+    [currentExperience, experienceToNextLevel],
+  );
+
+  return (
+    <Container>
+      <span>0 xp</span>
+      <div>
+        <ProgressBar at={progressBarAt}>
+          <span>{`${currentExperience}xp`}</span>
+        </ProgressBar>
+      </div>
+      <span>{`${experienceToNextLevel} xp`}</span>
+    </Container>
+  );
+};
 
 export default ExperienceBar;

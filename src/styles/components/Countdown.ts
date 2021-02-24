@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
 
 interface ButtonProps {
-  active: boolean;
+  active?: boolean;
+  disabled?: boolean;
 }
 
 export const Container = styled.div`
@@ -54,24 +55,38 @@ export const StyledButton = styled.button<ButtonProps>`
 
   border: 0;
   border-radius: 5px;
-
-  ${(props) =>
-    props.active
-      ? css`
-          background: var(--text-highlight);
-        `
-      : css`
-          background: var(--blue);
-        `}
+  transition: background-color 0.2s;
 
   color: var(--white);
 
-  font-size: 1.25rem;
-  font-weight: 600;
-
-  transition: background-color 0.2s;
+  background: var(--blue);
 
   &:hover {
     background: var(--blue-dark);
   }
+
+  ${(props) =>
+    props.disabled &&
+    css`
+      cursor: not-allowed;
+      background: var(--white);
+      color: var(--text);
+      opacity: 0.5;
+      pointer-events: none;
+    `}
+
+  ${(props) =>
+    props.active &&
+    css`
+      background: var(--white);
+      color: var(--title);
+
+      &:hover {
+        background: var(--red);
+        color: var(--white);
+      }
+    `}
+
+  font-size: 1.25rem;
+  font-weight: 600;
 `;
