@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useChallenge } from 'hooks/challenge';
+import { useCountdown } from 'hooks/countdown';
 
 import {
   Container,
@@ -11,6 +12,17 @@ import {
 
 const ChallengeBox = (): any => {
   const { activeChallenge, resetChallenge, completeChallenge } = useChallenge();
+  const { resetCountdown } = useCountdown();
+
+  const handleChallangeAction = (action: string): void => {
+    if (action === 'succeed') {
+      completeChallenge();
+    }
+    if (action === 'fail') {
+      resetChallenge();
+    }
+    resetCountdown();
+  };
 
   return (
     <Container>
@@ -23,10 +35,18 @@ const ChallengeBox = (): any => {
             <p>{activeChallenge.description}</p>
           </main>
           <footer>
-            <StyledButton onClick={resetChallenge} type="button" fail>
+            <StyledButton
+              onClick={() => handleChallangeAction('fail')}
+              type="button"
+              fail
+            >
               Falhei
             </StyledButton>
-            <StyledButton onClick={completeChallenge} type="button" succeeded>
+            <StyledButton
+              onClick={() => handleChallangeAction('succeed')}
+              type="button"
+              succeeded
+            >
               Completei
             </StyledButton>
           </footer>

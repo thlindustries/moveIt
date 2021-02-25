@@ -1,19 +1,20 @@
-import { useEffect, useState, useRef, useMemo } from 'react';
-import { Container, StyledButton } from 'styles/components/Countdown';
+import { useEffect } from 'react';
 
+import { useCountdown } from 'hooks/countdown';
 import { useChallenge } from 'hooks/challenge';
 
+import { Container, StyledButton } from 'styles/components/Countdown';
+
 const Countdown = (): any => {
-  const [time, setTime] = useState(0.05 * 60);
-  const [isActive, setIsActive] = useState(false);
-  const [hasFinished, setHasFinished] = useState(false);
-
+  const {
+    minutes,
+    seconds,
+    isCountdownActive,
+    hasFinished,
+    resetCountdown,
+    startCountdown,
+  } = useCountdown();
   const { startNewChallenge, activeChallenge } = useChallenge();
-
-  const timeOut = useRef<NodeJS.Timeout>(null);
-
-  const minutes = Math.floor(time / 60);
-  const seconds = time % 60;
 
   const [minutesFirstNumber, minutesSecondNumber] = String(minutes)
     .padStart(2, '0')
@@ -22,32 +23,6 @@ const Countdown = (): any => {
   const [secondsFirstNumber, secondsSecondNumber] = String(seconds)
     .padStart(2, '0')
     .split('');
-
-  const startCountdown = (): any => {
-    if (hasFinished) {
-      setTime(25 * 60);
-    }
-    setIsActive(true);
-  };
-
-  const resetCountdown = (): any => {
-    clearTimeout(timeOut.current);
-
-    setIsActive(false);
-    setTime(0.05 * 60);
-  };
-
-  useEffect(() => {
-    if (isActive && time > 0) {
-      timeOut.current = setTimeout(() => {
-        setTime(time - 1);
-      }, 1000);
-    } else if (isActive && time === 0) {
-      setHasFinished(true);
-      setIsActive(false);
-      startNewChallenge();
-    }
-  }, [isActive, time, startNewChallenge]);
 
   return (
     <div>
@@ -66,10 +41,10 @@ const Countdown = (): any => {
         <StyledButton disabled>Ciclo encerrado</StyledButton>
       ) : (
         <StyledButton
-          onClick={isActive ? resetCountdown : startCountdown}
-          active={isActive}
+          onClick={isCountdownActive ? resetCountdown : startCountdown}
+          active={isCountdownActive}
         >
-          {isActive ? 'Abandonar ciclo' : 'Iniciar um ciclo'}
+          {isCountdownActive ? 'Abandonar ciclo' : 'Iniciar um ciclo'}
         </StyledButton>
       )}
     </div>
