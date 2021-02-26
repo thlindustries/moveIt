@@ -108,9 +108,13 @@ export const ChallengeProvider = ({
   ]);
 
   useEffect(() => {
+    const user = { name: 'Thiago', email: 'thlindustries23@gmail.com' };
+
     Cookies.set('__moveit_level', String(level));
     Cookies.set('__moveit_currentExperience', String(currentExperience));
     Cookies.set('__moveit_challengesCompleted', String(challengesCompleted));
+
+    // Cookies.set('__moveit_user', JSON.stringify(user));
   }, [level, currentExperience, challengesCompleted]);
 
   useEffect(() => {

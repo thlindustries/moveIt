@@ -1,14 +1,17 @@
 import ExperienceBar from 'components/atoms/ExprienceBar';
 import Head from 'next/head';
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 
 import { CountdownProvider } from 'hooks/countdown';
 import { ChallengeProvider } from 'hooks/challenge';
+import { useAuth } from 'hooks/auth';
 
 import Profile from 'components/atoms/Profile';
 import CompletedChallenges from 'components/atoms/CompletedChallenges';
 import Countdown from 'components/atoms/Countdown';
 import ChallengeBox from 'components/atoms/ChallengeBox';
+
+import withAuth from 'components/withAuth';
 
 import * as S from 'styles/pages/Home';
 
@@ -18,38 +21,45 @@ interface HomeServerProps {
   challengesCompleted: number;
 }
 
-const Home = ({
+const Home: NextPage<HomeServerProps> = ({
   level,
   currentExperience,
   challengesCompleted,
-}: HomeServerProps): any => (
-  <ChallengeProvider
-    level={level}
-    currentExperience={currentExperience}
-    challengesCompleted={challengesCompleted}
-  >
-    <S.Container>
-      <Head>
-        <title>Move It</title>
-      </Head>
-      <ExperienceBar />
-      <CountdownProvider>
-        <section>
-          <S.LeftContainer>
-            <Profile />
-            <CompletedChallenges />
-            <Countdown />
-          </S.LeftContainer>
-          <S.RightContainer>
-            <ChallengeBox />
-          </S.RightContainer>
-        </section>
-      </CountdownProvider>
-    </S.Container>
-  </ChallengeProvider>
-);
+}): any => {
+  const { signOut } = useAuth();
 
-export default Home;
+  return (
+    <ChallengeProvider
+      level={level}
+      currentExperience={currentExperience}
+      challengesCompleted={challengesCompleted}
+    >
+      <S.Container>
+        <button type="button" onClick={signOut}>
+          sair
+        </button>
+        <Head>
+          <title>Move It</title>
+        </Head>
+        <ExperienceBar />
+        <CountdownProvider>
+          <section>
+            <S.LeftContainer>
+              <Profile />
+              <CompletedChallenges />
+              <Countdown />
+            </S.LeftContainer>
+            <S.RightContainer>
+              <ChallengeBox />
+            </S.RightContainer>
+          </section>
+        </CountdownProvider>
+      </S.Container>
+    </ChallengeProvider>
+  );
+};
+
+export default withAuth(Home);
 
 export const getServerSideProps: GetServerSideProps = async (
   ctx,
