@@ -6,11 +6,16 @@ import {
   ReactNode,
   useEffect,
 } from 'react';
+import Cookies from 'js-cookie';
 
 import challenges from 'services/challenges.json';
+import Modal from 'components/atoms/Modal';
 
 interface ChallengeContextProps {
   children: ReactNode;
+  level: number;
+  currentExperience: number;
+  challengesCompleted: number;
 }
 
 interface Challenge {
@@ -25,6 +30,7 @@ interface ChallengeContextData {
   experienceToNextLevel: number;
   challengesCompleted: number;
   activeChallenge: Challenge;
+  toggleLevelUpModal(): void;
   levelUp(): void;
   startNewChallenge(): void;
   resetChallenge(): void;
@@ -35,18 +41,31 @@ const ChallengeContext = createContext<ChallengeContextData>(
   {} as ChallengeContextData,
 );
 
-export const ChallengeProvider = ({ children }: ChallengeContextProps): any => {
-  const [level, setLevel] = useState(1);
-  const [currentExperience, setCurrentExperience] = useState(0);
-  const [challengesCompleted, setChallengesCompleted] = useState(0);
+export const ChallengeProvider = ({
+  children,
+  ...rest
+}: ChallengeContextProps): any => {
+  const [showLevelUpModal, setShowLevelUpModal] = useState(false);
+  const [level, setLevel] = useState(rest.level ?? 1);
+  const [currentExperience, setCurrentExperience] = useState(
+    rest.currentExperience ?? 0,
+  );
+  const [challengesCompleted, setChallengesCompleted] = useState(
+    rest.challengesCompleted ?? 0,
+  );
   const [activeChallenge, setActiveChallenge] = useState<Challenge>(null);
 
   // eslint-disable-next-line no-restricted-properties
   const experienceToNextLevel = Math.pow((level + 1) * 4, 2);
 
+  const toggleLevelUpModal = useCallback(() => {
+    setShowLevelUpModal(!showLevelUpModal);
+  }, [showLevelUpModal]);
+
   const levelUp = useCallback(() => {
     setLevel(level + 1);
-  }, [level]);
+    toggleLevelUpModal();
+  }, [level, toggleLevelUpModal]);
 
   const startNewChallenge = useCallback(() => {
     const randomChallengeIndex = Math.floor(Math.random() * challenges.length);
@@ -89,6 +108,12 @@ export const ChallengeProvider = ({ children }: ChallengeContextProps): any => {
   ]);
 
   useEffect(() => {
+    Cookies.set('__moveit_level', String(level));
+    Cookies.set('__moveit_currentExperience', String(currentExperience));
+    Cookies.set('__moveit_challengesCompleted', String(challengesCompleted));
+  }, [level, currentExperience, challengesCompleted]);
+
+  useEffect(() => {
     Notification.requestPermission();
   }, []);
 
@@ -101,12 +126,14 @@ export const ChallengeProvider = ({ children }: ChallengeContextProps): any => {
         experienceToNextLevel,
         activeChallenge,
         levelUp,
+        toggleLevelUpModal,
         startNewChallenge,
         resetChallenge,
         completeChallenge,
       }}
     >
       {children}
+      {showLevelUpModal && <Modal />}
     </ChallengeContext.Provider>
   );
 };

@@ -1,8 +1,5 @@
 import React from 'react';
-import { ChallengeProvider } from './challenge';
 
-const AppProvider: React.FC = ({ children }) => (
-  <ChallengeProvider>{children}</ChallengeProvider>
-);
+const AppProvider: React.FC = ({ children }) => <>{children}</>;
 
 export default AppProvider;
