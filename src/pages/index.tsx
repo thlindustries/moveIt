@@ -35,9 +35,9 @@ const Home: NextPage<HomeServerProps> = ({
       challengesCompleted={challengesCompleted}
     >
       <S.Container>
-        <button type="button" onClick={signOut}>
+        {/* <button type="button" onClick={signOut}>
           sair
-        </button>
+        </button> */}
         <Head>
           <title>Move It</title>
         </Head>
@@ -59,7 +59,7 @@ const Home: NextPage<HomeServerProps> = ({
   );
 };
 
-export default withAuth(Home);
+export default Home;
 
 export const getServerSideProps: GetServerSideProps = async (
   ctx,
