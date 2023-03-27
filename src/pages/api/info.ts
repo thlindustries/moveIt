@@ -1,7 +1,8 @@
 export default function handler(req, res): void {
   res.status(200).json({
     info: {
-      playstoreAppUri: 'https://thlinc.com',
+      playstoreAppUri:
+        'https://play.google.com/store/apps/details?id=com.futebolinterior',
     },
   });
 }
