@@ -1,4 +1,6 @@
 import Head from 'next/head';
+// eslint-disable-next-line import/no-unresolved
+import { Analytics } from '@vercel/analytics/react';
 
 import GlobalStyle from 'styles/global';
 import AppProvider from 'hooks';
@@ -17,6 +19,7 @@ const MyApp = ({ Component, pageProps }): any => (
       <GlobalStyle />
       <Component {...pageProps} />
     </AppProvider>
+    <Analytics />
   </>
 );
 
