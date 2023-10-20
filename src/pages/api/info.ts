@@ -10,6 +10,7 @@ export default function handler(req, res): void {
         showAccessibilityFeat: false,
         showNewBottomTabs: false,
         scoreRefreshDelay: 5,
+        disableLiveGamesRefresh: true,
       },
     });
   });
