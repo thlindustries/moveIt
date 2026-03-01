@@ -18,10 +18,23 @@ export default function handler(req, res): void {
                 text:
                   'Gerenciamento de equipe baseado em Scrum para otimizar as entregas e cumprir o cronograma.',
               },
+              {
+                id: 'a1b2c3d4-1111-4aaa-bbbb-111111111101',
+                text: 'Definição de roadmap e priorização de funcionalidades.',
+              },
+              {
+                id: 'a1b2c3d4-1111-4aaa-bbbb-111111111102',
+                text: 'Sprint planning, grooming de backlog e retrospectivas.',
+              },
+              {
+                id: 'a1b2c3d4-1111-4aaa-bbbb-111111111103',
+                text:
+                  'Estimativa de orçamento e previsão de prazos de entrega.',
+              },
             ],
           },
           {
-            name: 'Desenvolvimento web',
+            name: 'Desenvolvimento full stack',
             items: [
               {
                 id: '467801b7-ffea-4e49-a866-b28d1a9a5907',
@@ -48,6 +61,18 @@ export default function handler(req, res): void {
                 text:
                   'Desenvolvimento de bibliotecas, CI/CD, testes unity&E2E e +.',
               },
+              {
+                id: 'a1b2c3d4-2222-4aaa-bbbb-222222222201',
+                text: 'Apps mobile nativos com React Native e Flutter.',
+              },
+              {
+                id: 'a1b2c3d4-2222-4aaa-bbbb-222222222202',
+                text: 'dApps Web3 e integração com smart contracts.',
+              },
+              {
+                id: 'a1b2c3d4-2222-4aaa-bbbb-222222222203',
+                text: 'APIs REST & GraphQL, microsserviços e serverless.',
+              },
             ],
           },
           {
@@ -67,6 +92,16 @@ export default function handler(req, res): void {
                 id: '70edc6fa-64c7-4cbe-874b-d2a1f1d5bcf0',
                 text: 'Confiabilidade, fácil de usar e totalmente documentado.',
               },
+              {
+                id: 'a1b2c3d4-3333-4aaa-bbbb-333333333301',
+                text:
+                  'Integrações com CMS headless como Strapi, Contentful, Sanity e outros.',
+              },
+              {
+                id: 'a1b2c3d4-3333-4aaa-bbbb-333333333302',
+                text:
+                  'Dashboards administrativos com controle de acesso baseado em roles.',
+              },
             ],
           },
         ],
@@ -84,10 +119,22 @@ export default function handler(req, res): void {
                 text:
                   'Scrum based team management to optimize deliveries and meet the schedule.',
               },
+              {
+                id: 'b1c2d3e4-1111-4bbb-cccc-111111111101',
+                text: 'Roadmap definition and feature prioritization.',
+              },
+              {
+                id: 'b1c2d3e4-1111-4bbb-cccc-111111111102',
+                text: 'Sprint planning, backlog grooming and retros.',
+              },
+              {
+                id: 'b1c2d3e4-1111-4bbb-cccc-111111111103',
+                text: 'Budget estimation and delivery timeline forecasting.',
+              },
             ],
           },
           {
-            name: 'Web Development',
+            name: 'Full stack development',
             items: [
               {
                 id: '925cbca5-576c-492b-86f8-fa51ee22d5bf',
@@ -112,6 +159,18 @@ export default function handler(req, res): void {
                 id: '3bff9574-9b29-4de1-96ed-cd600d3441b1',
                 text: 'Library development, CI/CD, unity&E2E tests and +.',
               },
+              {
+                id: 'b1c2d3e4-2222-4bbb-cccc-222222222201',
+                text: 'Native mobile apps with React Native and Flutter.',
+              },
+              {
+                id: 'b1c2d3e4-2222-4bbb-cccc-222222222202',
+                text: 'Web3 dApps and smart contract integrations.',
+              },
+              {
+                id: 'b1c2d3e4-2222-4bbb-cccc-222222222203',
+                text: 'REST & GraphQL APIs, microservices and serverless.',
+              },
             ],
           },
           {
@@ -131,6 +190,15 @@ export default function handler(req, res): void {
                 id: 'dc0a3093-7400-49ac-86ad-6f0b7410e9f4',
                 text: 'Reliability, easy to use and fully documented.',
               },
+              {
+                id: 'b1c2d3e4-3333-4bbb-cccc-333333333301',
+                text:
+                  'Headless CMS setups with Strapi, Contentful, Sanity and others.',
+              },
+              {
+                id: 'b1c2d3e4-3333-4bbb-cccc-333333333302',
+                text: 'Admin dashboards with role-based access control.',
+              },
             ],
           },
         ],
@@ -148,10 +216,25 @@ export default function handler(req, res): void {
                 text:
                   'Gestión de equipos basada en Scrum para optimizar las entregas y cumplir con el cronograma.',
               },
+              {
+                id: 'c1d2e3f4-1111-4ccc-dddd-111111111101',
+                text:
+                  'Definición de roadmap y priorización de funcionalidades.',
+              },
+              {
+                id: 'c1d2e3f4-1111-4ccc-dddd-111111111102',
+                text:
+                  'Sprint planning, grooming de backlog y retrospectivas.',
+              },
+              {
+                id: 'c1d2e3f4-1111-4ccc-dddd-111111111103',
+                text:
+                  'Estimación de presupuesto y previsión de plazos de entrega.',
+              },
             ],
           },
           {
-            name: 'Desarrollo web',
+            name: 'Desarrollo full stack',
             items: [
               {
                 id: 'a3c089aa-8bf8-4a1f-81c1-dc1d3bc75cc5',
@@ -177,10 +260,22 @@ export default function handler(req, res): void {
                 id: 'd1ab1112-53e0-4c0a-897f-a4be8aab0f68',
                 text: 'Desarrollo de librería, CI/CD, pruebas unity&E2E y +.',
               },
+              {
+                id: 'c1d2e3f4-2222-4ccc-dddd-222222222201',
+                text: 'Apps móviles nativos con React Native y Flutter.',
+              },
+              {
+                id: 'c1d2e3f4-2222-4ccc-dddd-222222222202',
+                text: 'dApps Web3 e integración con smart contracts.',
+              },
+              {
+                id: 'c1d2e3f4-2222-4ccc-dddd-222222222203',
+                text: 'APIs REST & GraphQL, microservicios y serverless.',
+              },
             ],
           },
           {
-            name: 'Content management platforms',
+            name: 'Plataformas de gestión de contenidos',
             items: [
               {
                 id: '8487ce7c-a2d3-46dc-8c00-30b143f9bf83',
@@ -195,6 +290,16 @@ export default function handler(req, res): void {
               {
                 id: '097a1fa7-41f8-416e-861a-0dab38e857eb',
                 text: 'Fiabilidad, fácil de usar y totalmente documentado.',
+              },
+              {
+                id: 'c1d2e3f4-3333-4ccc-dddd-333333333301',
+                text:
+                  'Integraciones con CMS headless como Strapi, Contentful, Sanity y otros.',
+              },
+              {
+                id: 'c1d2e3f4-3333-4ccc-dddd-333333333302',
+                text:
+                  'Dashboards administrativos con control de acceso basado en roles.',
               },
             ],
           },
